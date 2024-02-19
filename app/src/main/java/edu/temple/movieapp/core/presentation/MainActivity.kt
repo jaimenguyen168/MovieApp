@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import edu.temple.movieapp.movie_detail.presetation.MovieDetailScreen
 import edu.temple.movieapp.movie_list.presentation.MovieListViewModel
 import edu.temple.movieapp.movie_list.util.Screen
 import edu.temple.movieapp.ui.theme.MovieAppTheme
@@ -53,7 +54,7 @@ class MainActivity : ComponentActivity() {
                                 navArgument("movieId") {type = NavType.IntType}
                             )
                         ) {
-
+                            MovieDetailScreen()
                         }
                     }
                 }

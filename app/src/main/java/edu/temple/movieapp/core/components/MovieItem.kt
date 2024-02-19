@@ -92,7 +92,8 @@ fun MovieItem(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.ImageNotSupported,
-                    contentDescription = movie.title
+                    contentDescription = movie.title,
+                    modifier = Modifier.size(70.dp)
                 )
             }
         } else if (imageState is AsyncImagePainter.State.Success) {
