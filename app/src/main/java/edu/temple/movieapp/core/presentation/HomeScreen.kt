@@ -125,7 +125,12 @@ fun BottomNavBar(
                 NavigationBarItem(
                     selected = selected.intValue == index, 
                     onClick = {
+                        if (selected.intValue == index) {
+                            return@NavigationBarItem  // If the button is already selected, do nothing
+                        }
+
                         selected.intValue = index
+
                         when(selected.intValue) {
                             0 -> {
                                 onEvent(MovieListUiEvent.Navigate)
