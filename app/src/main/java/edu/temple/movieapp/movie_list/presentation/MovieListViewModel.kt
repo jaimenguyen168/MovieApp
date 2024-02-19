@@ -31,11 +31,11 @@ class MovieListViewModel @Inject constructor(
             is MovieListUiEvent.Paginate -> {
                 if (event.category == Category.POPULAR) {
                     getPopularMovieList(true)
-                } else {
+                } else if (event.category == Category.UPCOMING){
                     getUpcomingMovieList(true)
                 }
             }
-            is MovieListUiEvent.Navigate -> {
+            MovieListUiEvent.Navigate -> {
                 _movieListState.update {
                     it.copy(
                         isPopularScreen = !movieListState.value.isPopularScreen
@@ -75,7 +75,7 @@ class MovieListViewModel @Inject constructor(
                     }
                     is Resource.Loading -> {
                         _movieListState.update {
-                            it.copy(isLoading = true)
+                            it.copy(isLoading = result.isLoading)
                         }
                     }
                 }
@@ -113,7 +113,7 @@ class MovieListViewModel @Inject constructor(
                     }
                     is Resource.Loading -> {
                         _movieListState.update {
-                            it.copy(isLoading = true)
+                            it.copy(isLoading = result.isLoading)
                         }
                     }
                 }

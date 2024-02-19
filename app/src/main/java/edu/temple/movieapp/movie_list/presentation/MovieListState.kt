@@ -9,6 +9,7 @@ data class MovieListState (
     val upcomingMovieListPage: Int = 1,
 
     val isPopularScreen: Boolean = true,
+
     val popularMovieList: List<Movie> = emptyList(),
     val upcomingMovieList: List<Movie> = emptyList(),
 )

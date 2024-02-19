@@ -24,7 +24,7 @@ class MovieListRepoImplementation @Inject constructor(
     ): Flow<Resource<List<Movie>>> {
         return flow {
             emit(Resource.Loading(true))
-            val localMovieList = movieDatabase.movieDao.getMovieByCategory(category)
+            val localMovieList = movieDatabase.movieDao.getMovieListByCategory(category)
             val shouldLoadLocally = localMovieList.isNotEmpty() && !fetchFromRemote
 
             if (shouldLoadLocally) {
@@ -61,7 +61,7 @@ class MovieListRepoImplementation @Inject constructor(
 
             movieDatabase.movieDao.upsertMovieList(movieEntities)
             emit(Resource.Success(
-                movieDatabase.movieDao.getMovieByCategory(category).map {
+                movieEntities.map {
                     it.toMovie(category)
                 }
             ))
@@ -75,9 +75,11 @@ class MovieListRepoImplementation @Inject constructor(
             val localMovieEntity = movieDatabase.movieDao.getMovieById(id)
 
             if (localMovieEntity != null) {
-                emit(Resource.Success(
-                    data = localMovieEntity.toMovie(localMovieEntity.category)
-                ))
+                emit(
+                    Resource.Success(
+                        data = localMovieEntity.toMovie(localMovieEntity.category)
+                    )
+                )
                 emit(Resource.Loading(false))
                 return@flow
             }
