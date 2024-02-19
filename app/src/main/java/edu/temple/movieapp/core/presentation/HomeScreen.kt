@@ -43,7 +43,7 @@ fun HomeScreen(
     navController: NavHostController
 ) {
     val movieListViewModel = hiltViewModel<MovieListViewModel>()
-    val movieState = movieListViewModel.movieListState.collectAsState().value
+    val movieListState = movieListViewModel.movieListState.collectAsState().value
     val bottomNavController = rememberNavController()
 
     Scaffold(
@@ -52,7 +52,7 @@ fun HomeScreen(
                 title = {
                     Text(
                         modifier = Modifier.padding(start = 16.dp),
-                        text = if (movieState.isPopularScreen) "Popular Movies" else "Upcoming Movies",
+                        text = if (movieListState.isPopularScreen) "Popular Movies" else "Upcoming Movies",
                         fontSize = 20.sp
                     )
                 },
@@ -79,10 +79,18 @@ fun HomeScreen(
                 startDestination = Screen.PopularMovieList.route
             ) {
                 composable(Screen.PopularMovieList.route) {
-
+                    PopularMovieScreen(
+                        movieListState = movieListState,
+                        navController = navController,
+                        onEvent = movieListViewModel::onEvent
+                    )
                 }
                 composable(Screen.UpcomingMovieList.route) {
-
+                    UpcomingMovieScreen(
+                        movieListState = movieListState,
+                        navController = navController,
+                        onEvent = movieListViewModel::onEvent
+                    )
                 }
             }
         }
