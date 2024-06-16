@@ -52,6 +52,6 @@ fun MovieDto.toMovieEntity(
     genre_ids = try {
         genre_ids?.joinToString { "," } ?: "-1, -2"
     } catch (e: Exception) {
-        "-1, -2"
+        "-1,-2"
     }
 )
